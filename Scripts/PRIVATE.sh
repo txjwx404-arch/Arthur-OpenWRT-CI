@@ -9,6 +9,9 @@ rm -rf ./feeds/packages/net/dae ./feeds/packages/net/daed ./feeds/luci/applicati
 rm -rf ./package/feeds/packages/dae ./package/feeds/packages/daed ./package/feeds/luci/luci-app-daed ./package/feeds/luci/luci-app-dae
 git clone --depth=1 --single-branch --branch main https://github.com/kenzok8/openwrt-daede.git ./package/daede || echo "daede clone failed"
 
+# 修复：immortalwrt packages 的 miniupnpd 2.3.11 补丁 020 与源码不匹配导致编译失败（2026-10-17）
+rm -f ./feeds/packages/net/miniupnpd/patches/020-descr-filter-fix.patch
+
 # 生成固件内置文件
 mkdir -p ./files/etc/init.d ./files/etc/sysctl.d ./files/etc/uci-defaults
 
