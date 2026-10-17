@@ -4,6 +4,11 @@
 # iStore（linkease）
 git clone --depth=1 --single-branch --branch main https://github.com/linkease/istore.git ./package/istore || echo "istore clone failed"
 
+# daede（kenzok8）：dae + daed + luci-app-daede，替换 feeds 里自带的 dae/daed
+rm -rf ./feeds/packages/net/dae ./feeds/packages/net/daed ./feeds/luci/applications/luci-app-daed ./feeds/luci/applications/luci-app-dae
+rm -rf ./package/feeds/packages/dae ./package/feeds/packages/daed ./package/feeds/luci/luci-app-daed ./package/feeds/luci/luci-app-dae
+git clone --depth=1 --single-branch --branch main https://github.com/kenzok8/openwrt-daede.git ./package/daede || echo "daede clone failed"
+
 # 生成固件内置文件
 mkdir -p ./files/etc/init.d ./files/etc/sysctl.d ./files/etc/uci-defaults
 
