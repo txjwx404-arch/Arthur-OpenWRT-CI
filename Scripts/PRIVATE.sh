@@ -10,7 +10,9 @@ rm -rf ./package/feeds/packages/dae ./package/feeds/packages/daed ./package/feed
 git clone --depth=1 --single-branch --branch main https://github.com/kenzok8/openwrt-daede.git ./package/daede || echo "daede clone failed"
 
 # 修复：immortalwrt packages 的 miniupnpd 2.3.11 补丁 020 与源码不匹配导致编译失败（2026-10-17）
-rm -f ./feeds/packages/net/miniupnpd/patches/020-descr-filter-fix.patch
+# 020/030/040/900 都是旧版本留下的补丁，对 2.3.11 打不上（上游 OpenWrt 已无这些补丁），只保留能打上的 010
+find ./feeds/packages/net/miniupnpd/patches -type f ! -name '010-*' -delete 2>/dev/null || true
+ls ./feeds/packages/net/miniupnpd/patches 2>/dev/null
 
 # 生成固件内置文件
 mkdir -p ./files/etc/init.d ./files/etc/sysctl.d ./files/etc/uci-defaults
