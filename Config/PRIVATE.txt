@@ -1,7 +1,10 @@
 
 # 代理 / 组网
-CONFIG_PACKAGE_luci-app-daed=y
+CONFIG_PACKAGE_luci-app-daede=y
+CONFIG_PACKAGE_luci-app-daede_daed=y
 CONFIG_PACKAGE_daed=y
+CONFIG_PACKAGE_dae=y
+CONFIG_DAED_USE_KERNEL_BTF=y
 # daed 依赖 eBPF：内核需开 BTF/BPF
 CONFIG_DEVEL=y
 CONFIG_BPF_TOOLCHAIN_HOST=y
