@@ -14,6 +14,11 @@ git clone --depth=1 --single-branch --branch main https://github.com/kenzok8/ope
 find ./feeds/packages/net/miniupnpd/patches -type f ! -name '010-*' -delete 2>/dev/null || true
 ls ./feeds/packages/net/miniupnpd/patches 2>/dev/null
 
+# 修复：daede 需要内核内置 BTF，gzip 内核 7.59MB 超过亚瑟 6MB 内核分区（2026-10-18）
+# 亚瑟改用 LZMA 压缩的 FIT 内核（同平台 8devices mango 已在用），压缩率更高
+sed -i '/define Device\/jdcloud_re-ss-01/,/endef/ s#\$(call Device/FitImage)#$(call Device/FitImageLzma)#' ./target/linux/qualcommax/image/ipq60xx.mk
+grep -A3 'define Device/jdcloud_re-ss-01' ./target/linux/qualcommax/image/ipq60xx.mk
+
 # 生成固件内置文件
 mkdir -p ./files/etc/init.d ./files/etc/sysctl.d ./files/etc/uci-defaults
 
